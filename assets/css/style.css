@@ -827,6 +827,7 @@ main {
   color: var(--light-gray);
   font-weight: var(--fw-300);
   line-height: 1.6;
+  list-style:circle
 }
 
 
@@ -1337,7 +1338,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar-info { gap: 25px; }
 
-  .avatar-box { border-radius: 30px; }
+  .avatar-box { border-radius: 30px; overflow: hidden; }
 
   .avatar-box img { width: 120px; }
 
