@@ -321,7 +321,7 @@ main {
   transition: var(--transition-2);
 }
 
-.sidebar.active { max-height: 405px; }
+.sidebar.active { max-height: 430px; }
 
 .sidebar-info {
   position: relative;
@@ -434,8 +434,8 @@ main {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 15px;
-  padding-bottom: 4px;
+  gap: 20px;
+  padding-bottom: 15px;
   padding-left: 7px;
 }
 
