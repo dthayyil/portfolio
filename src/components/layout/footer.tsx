@@ -29,7 +29,7 @@ export function Footer() {
         </div>
       </div>
       <div className="container-page mt-8 text-center text-xs text-fg-muted">
-        © {year} {site.name}. Built with Next.js, TypeScript, Tailwind &amp; Framer Motion.
+        © {year} {site.name}.
       </div>
     </footer>
   );

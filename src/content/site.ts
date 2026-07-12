@@ -9,12 +9,12 @@ export const site = {
   brand: "Principal Software Engineer · Cloud Architect · AI-Native Engineering Leader",
   domain: "deepakthayyil.online",
   url: "https://deepakthayyil.online",
-  email: "hello@deepakthayyil.online",
-  location: "United Kingdom",
+  email: "dthayyil@gmail.com",
+  location: "Bengaluru, India",
   socials: {
     linkedin: "https://www.linkedin.com/in/deepakthayyil/",
     github: "https://github.com/dthayyil",
-    email: "mailto:hello@deepakthayyil.online",
+    email: "mailto:dthayyil@gmail.com",
   },
   keywords: [
     "Principal Software Engineer",

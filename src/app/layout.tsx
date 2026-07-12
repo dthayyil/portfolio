@@ -45,7 +45,7 @@ export const metadata: Metadata = {
       "AI-Native Engineering Leader — Platform Engineering, AI-DLC, GitHub Copilot, Cloud-Native Architecture.",
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/deepak-profile.ico" },
 };
 
 export const viewport: Viewport = {
