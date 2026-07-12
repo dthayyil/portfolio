@@ -1,0 +1,39 @@
+---
+title: "Governed GitHub Copilot Enablement at Enterprise Scale"
+description: "Rolling out Copilot to hundreds of engineers is easy. Doing it with standards, security review and measurable ROI is the hard — and valuable — part."
+date: "2026-05-14"
+category: "GitHub Copilot"
+tags: ["GitHub Copilot", "Developer Productivity", "Governance"]
+---
+
+Most Copilot rollouts stall at "we turned it on." Seats get assigned, usage is
+uneven, and leadership can't answer the only question that matters: *is this
+making us better?*
+
+## Three pillars of governed enablement
+
+1. **Standards** — shared custom instructions, prompt patterns and repo-level
+   configuration so AI output matches your architecture.
+2. **Guardrails** — security and policy review of AI-generated changes, ideally
+   automated in CI.
+3. **Metrics** — adoption, acceptance rate, lead-time and quality signals tied to
+   business outcomes.
+
+## Measuring what matters
+
+Vanity metrics (suggestions shown) tell you nothing. Track **accepted-and-shipped**
+changes, review rework, and cycle time. Pair quantitative signals with developer
+sentiment.
+
+```ts
+// Example: a lightweight adoption metric surfaced to leadership
+type CopilotSignal = {
+  team: string;
+  acceptanceRate: number; // accepted / shown
+  leadTimeDelta: number;  // vs. baseline, in hours
+  reviewRework: number;   // % of AI PRs needing significant rework
+};
+```
+
+Governed enablement turns Copilot from a novelty into a compounding productivity
+advantage — one you can actually defend in a business case.
