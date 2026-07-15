@@ -58,6 +58,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -85,18 +87,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
         </ThemeProvider>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-KE3YXV54GX`}
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
+        {GA_TRACKING_ID ? (
+          <>
+            <Script
+              strategy="lazyOnload"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script id="gtag-init" strategy="lazyOnload">
+              {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-KE3YXV54GX', {
+gtag('config', '${GA_TRACKING_ID}', {
   page_path: window.location.pathname,
 });`}
-        </Script>
+            </Script>
+          </>
+        ) : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
