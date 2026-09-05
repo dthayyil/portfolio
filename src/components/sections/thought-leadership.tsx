@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight, Clock, ExternalLink, Linkedin } from "lucide-react";
 import type { PostMeta } from "@/lib/blog";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { stagger, staggerItem, viewportOnce } from "@/lib/motion";
@@ -42,34 +42,64 @@ export function ThoughtLeadership({ posts }: { posts: PostMeta[] }) {
           viewport={viewportOnce}
           className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
         >
-          {posts.map((post) => (
-            <motion.div key={post.slug} variants={staggerItem} whileHover={{ y: -4 }}>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="card card-hover group flex h-full flex-col p-6"
-              >
-                <div className="flex items-center gap-2 text-xs text-fg-muted">
-                  <span className="rounded-full bg-brand/10 px-2 py-0.5 font-medium text-brand">
-                    {post.category}
-                  </span>
-                  <span>·</span>
-                  <span>{fmt(post.date)}</span>
-                </div>
-                <h3 className="mt-3 text-lg font-semibold leading-snug transition-colors group-hover:text-brand">
-                  {post.title}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">
-                  {post.description}
-                </p>
-                <div className="mt-4 flex items-center gap-1.5 text-xs text-fg-muted">
-                  <Clock className="h-3.5 w-3.5" />
-                  {post.readingTime}
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+          {posts.map((post) => {
+            const isExternal = Boolean(post.externalUrl);
+            const CardWrapper = isExternal ? "a" : Link;
+            const linkProps = isExternal
+              ? {
+                  href: post.externalUrl!,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                }
+              : { href: `/blog/${post.slug}` };
+
+            return (
+              <motion.div key={post.slug} variants={staggerItem} whileHover={{ y: -4 }}>
+                <CardWrapper
+                  {...(linkProps as any)}
+                  className="card card-hover group flex h-full flex-col p-6 relative"
+                >
+                  <div className="flex items-center justify-between text-xs text-fg-muted">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-brand/10 px-2 py-0.5 font-medium text-brand">
+                        {post.category}
+                      </span>
+                      <span>·</span>
+                      <span>{fmt(post.date)}</span>
+                    </div>
+                    {post.source === "linkedin" && (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#0A66C2]">
+                        <Linkedin className="h-3.5 w-3.5 fill-current" /> LinkedIn
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold leading-snug transition-colors group-hover:text-brand flex items-start justify-between gap-2">
+                    <span>{post.title}</span>
+                    {isExternal && (
+                      <ExternalLink className="h-4 w-4 shrink-0 text-fg-muted opacity-60 group-hover:text-brand group-hover:opacity-100 transition-opacity" />
+                    )}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">
+                    {post.description}
+                  </p>
+                  <div className="mt-4 flex items-center justify-between text-xs text-fg-muted">
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="h-3.5 w-3.5" />
+                      {post.readingTime}
+                    </div>
+                    {isExternal && (
+                      <span className="text-xs text-brand font-medium group-hover:underline">
+                        Read on LinkedIn &rarr;
+                      </span>
+                    )}
+                  </div>
+                </CardWrapper>
+              </motion.div>
+            );
+          })}
         </motion.div>
       )}
     </Section>
   );
 }
+
