@@ -5,18 +5,24 @@
 
 export const site = {
   name: "Deepak T",
+  fullName: "Deepak Thayyil",
   role: "Principal Software Engineer",
   brand: "Principal Software Engineer · Cloud Architect · AI-Native Engineering Leader",
   domain: "deepakthayyil.online",
   url: "https://deepakthayyil.online",
   email: "dthayyil@gmail.com",
   location: "Bengaluru, India",
+  worksFor: {
+    name: "Independent / Consulting",
+    type: "Organization",
+  },
   socials: {
     linkedin: "https://www.linkedin.com/in/deepakthayyil/",
     github: "https://github.com/dthayyil",
     email: "mailto:dthayyil@gmail.com",
   },
   keywords: [
+    "Deepak Thayyil",
     "Principal Software Engineer",
     "Cloud Architect",
     "AI-DLC",
