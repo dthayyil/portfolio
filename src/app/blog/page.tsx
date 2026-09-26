@@ -2,11 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Clock, ExternalLink, Linkedin } from "lucide-react";
 import { getAllPosts, formatDate } from "@/lib/blog";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Articles",
+  title: "Articles by Deepak Thayyil",
   description:
-    "Thought leadership on AI-DLC, GitHub Copilot, agentic engineering, platform engineering, Azure AI and developer experience.",
+    "Thought leadership by Deepak Thayyil on AI-DLC, GitHub Copilot, agentic engineering, platform engineering, Azure AI and developer experience.",
+  alternates: { canonical: `${site.url}/blog/` },
+  openGraph: {
+    type: "website",
+    url: `${site.url}/blog/`,
+    title: "Articles by Deepak Thayyil — AI-Native Engineering",
+    description:
+      "Thought leadership on AI-DLC, GitHub Copilot, agentic workflows, platform engineering and developer experience.",
+  },
 };
 
 export default function BlogIndex() {

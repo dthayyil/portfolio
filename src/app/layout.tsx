@@ -22,26 +22,28 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Principal Software Engineer | Cloud Architect | AI-Native Engineering`,
-    template: `%s · ${site.name}`,
+    default: `Deepak Thayyil — Principal Software Engineer | Cloud Architect | AI-Native Engineering`,
+    template: `%s · Deepak Thayyil`,
   },
   description:
-    "Principal Software Engineer & Cloud Architect helping organisations modernise software delivery through Platform Engineering, AI-Augmented Development (AI-DLC), Cloud-Native Architecture and Intelligent Automation.",
+    "Deepak Thayyil — Principal Software Engineer & Cloud Architect helping organisations modernise software delivery through Platform Engineering, AI-Augmented Development (AI-DLC), Cloud-Native Architecture and Intelligent Automation.",
   keywords: [...site.keywords],
-  authors: [{ name: site.name, url: site.url }],
-  creator: site.name,
+  authors: [{ name: site.fullName, url: site.url }],
+  creator: site.fullName,
   alternates: { canonical: site.url },
   openGraph: {
     type: "website",
     url: site.url,
-    siteName: `${site.name} — AI-Native Engineering`,
-    title: `${site.name} — Principal Software Engineer | Cloud Architect`,
+    siteName: `Deepak Thayyil — AI-Native Engineering`,
+    title: `Deepak Thayyil — Principal Software Engineer | Cloud Architect`,
     description:
       "Building the future of AI-native engineering: Platform Engineering, AI-DLC, GitHub Copilot enablement, Cloud-Native Architecture and DevOps governance.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Principal Software Engineer | Cloud Architect`,
+    site: "@deepakthayyil",
+    creator: "@deepakthayyil",
+    title: `Deepak Thayyil — Principal Software Engineer | Cloud Architect`,
     description:
       "AI-Native Engineering Leader — Platform Engineering, AI-DLC, GitHub Copilot, Cloud-Native Architecture.",
   },
@@ -63,13 +65,29 @@ const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: site.name,
+  name: site.fullName,
+  alternateName: site.name,
   jobTitle: "Principal Software Engineer",
   url: site.url,
-  sameAs: [site.socials.linkedin, site.socials.github],
+  image: `${site.url}/deepak-profile.webp`,
+  email: site.email,
+  sameAs: [
+    site.socials.linkedin,
+    site.socials.github,
+    site.url,
+  ],
+  worksFor: {
+    "@type": site.worksFor.type,
+    name: site.worksFor.name,
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bengaluru",
+    addressCountry: "IN",
+  },
   knowsAbout: site.keywords,
   description:
-    "Principal Software Engineer and Cloud Architect specialising in AI-DLC, Platform Engineering and Cloud-Native Architecture.",
+    "Deepak Thayyil is a Principal Software Engineer and Cloud Architect specialising in AI-DLC, Platform Engineering, GitHub Copilot Enablement and Cloud-Native Architecture.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

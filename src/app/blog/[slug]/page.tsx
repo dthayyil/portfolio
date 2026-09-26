@@ -6,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { getPostBySlug, getPostSlugs, formatDate } from "@/lib/blog";
+import { site } from "@/content/site";
 
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
@@ -22,12 +23,16 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
+    alternates: { canonical: `${site.url}/blog/${slug}/` },
+    authors: [{ name: site.fullName, url: site.url }],
     openGraph: {
       type: "article",
       title: post.title,
       description: post.description,
+      url: `${site.url}/blog/${slug}/`,
       publishedTime: post.date,
       tags: post.tags,
+      authors: [site.fullName],
     },
   };
 }
@@ -41,8 +46,35 @@ export default async function PostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    url: `${site.url}/blog/${slug}/`,
+    author: {
+      "@type": "Person",
+      name: site.fullName,
+      url: site.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: site.fullName,
+      url: site.url,
+    },
+    keywords: post.tags?.join(", "),
+    inLanguage: "en",
+    ...(post.externalUrl ? { sameAs: post.externalUrl } : {}),
+  };
+
   return (
     <article className="container-page min-h-screen max-w-3xl pb-24 pt-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Link
         href="/blog"
         className="inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
