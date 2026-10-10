@@ -1,5 +1,5 @@
 import { HelpCircle } from "lucide-react";
-import { Section } from "@/components/ui/section";
+import { Section, SectionHeading } from "@/components/ui/section";
 
 export const FAQ_DATA = [
   {
@@ -36,11 +36,8 @@ export const FAQ_DATA = [
 
 export default function FAQSection() {
   return (
-    <Section
-      id="faq"
-      title="Frequently Asked Questions"
-      className="pb-20"
-    >
+    <Section id="faq" className="pb-20">
+      <SectionHeading title="Frequently Asked Questions" />
       <div className="grid max-w-3xl mx-auto gap-6">
         {FAQ_DATA.map(({ question, answer }, index) => (
           <div key={index} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">

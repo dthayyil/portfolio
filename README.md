@@ -154,6 +154,16 @@ Your content here with **markdown** and <JSX />
 
 Posts are automatically picked up and routed based on filename (slug).
 
+## Syncing LinkedIn Activity
+
+Run the scraper locally to import recent LinkedIn posts and articles:
+
+```bash
+npm run scrape-linkedin
+```
+
+The first run may ask you to sign in in the opened browser. The session is stored locally in `.playwright-session/`. Review the updated `content/blog/linkedin-articles.json`, then commit and push it to `master` to publish the changes. LinkedIn activity is not fetched during CI because the scraper requires your authenticated browser session.
+
 ## Customization
 
 ### Site Configuration
