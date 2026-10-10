@@ -10,7 +10,7 @@ import { Skills } from "@/components/sections/skills";
 import { Timeline } from "@/components/sections/timeline";
 import { OperatingSystem } from "@/components/sections/operating-system";
 import { Contact } from "@/components/sections/contact";
-import { FAQSection } from "@/components/schema/FAQSection";
+import FAQSection from "@/components/schema/FAQSection";
 import { getLatestPosts } from "@/lib/blog";
 
 export default function HomePage() {

@@ -1,4 +1,4 @@
-import { FAQ } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { Section } from "@/components/ui/section";
 
 export const FAQ_DATA = [
@@ -45,7 +45,7 @@ export default function FAQSection() {
         {FAQ_DATA.map(({ question, answer }, index) => (
           <div key={index} className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
             <h3 className="text-lg font-medium mb-3 flex items-center gap-2">
-              <FAQ className="h-4 w-4 text-brand" />{question}
+              <HelpCircle className="h-4 w-4 text-brand" />{question}
             </h3>
             <p className="text-fg-muted leading-relaxed">{answer}</p>
           </div>
