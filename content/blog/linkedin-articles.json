@@ -1,129 +1,9 @@
 [
   {
-    "slug": "linkedin-from-sprints-to-bolts-transitioning-to-the-ai-driv",
-    "title": "🚀 From Sprints to Bolts: Transitioning to the AI-Driven Development Life Cycle (AI-DLC)",
-    "description": "🚀 From Sprints to Bolts: Transitioning to the AI-Driven Development Life Cycle (AI-DLC)",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/from-sprints-bolts-transitioning-ai-driven-development-deepak-t-fd4tc/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-microsoft-s-new-era-of-ai-amplifying-human-potenti",
-    "title": "Microsoft's New Era of AI: Amplifying Human Potential 🚀",
-    "description": "Microsoft's New Era of AI: Amplifying Human Potential 🚀",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/microsofts-new-era-ai-amplifying-human-potential-deepak-t-iskdc/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-from-agile-sprints-to-agentic-workflows-my-evoluti",
-    "title": "From Agile Sprints to Agentic Workflows: My Evolution from SDLC to AI-DLC",
-    "description": "From Agile Sprints to Agentic Workflows: My Evolution from SDLC to AI-DLC",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/from-agile-sprints-agentic-workflows-my-evolution-sdlc-deepak-t-n9wpc/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-typescript-7-0-beta-10x-faster-with-go-powered-com",
-    "title": "TypeScript 7.0 Beta: 10x Faster with Go-Powered Compiler",
-    "description": "TypeScript 7.0 Beta: 10x Faster with Go-Powered Compiler",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/typescript-70-beta-10x-faster-go-powered-compiler-deepak-t-mmcnc/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-goodbye-guids-hello-sanity-managing",
-    "title": "Goodbye GUIDs, Hello Sanity: Managing",
-    "description": "Goodbye GUIDs, Hello Sanity: Managing .NET Solutions with the New .slnx Format and CLI Tools",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/goodbye-guids-hello-sanity-managing-net-solutions-new-deepak-t-n2axc/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-microsoft-agent-framework-1-0-is-officially-here-t",
-    "title": "🚀 Microsoft Agent Framework 1.0 is Officially Here! The Next Era of AI Orchestration",
-    "description": "🚀 Microsoft Agent Framework 1.0 is Officially Here! The Next Era of AI Orchestration",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/microsoft-agent-framework-10-officially-here-next-era-deepak-t-sofxc/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-net-aspire-13-2-the-shift-to-agent-native-orchestr",
-    "title": "🚀 .NET Aspire 13.2: The Shift to \"Agent-Native\" Orchestration",
-    "description": "🚀 .NET Aspire 13.2: The Shift to \"Agent-Native\" Orchestration",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/net-aspire-132-shift-agent-native-orchestration-deepak-t-wxgec/",
-    "source": "linkedin"
-  },
-  {
-    "slug": "linkedin-net-monorepo-migration-the-2026-blueprint",
-    "title": "🚀 .NET Monorepo Migration: The 2026 Blueprint",
-    "description": "🚀 .NET Monorepo Migration: The 2026 Blueprint",
-    "date": "2026-10-10T05:56:08.337Z",
-    "category": "LinkedIn Article",
-    "tags": [
-      "LinkedIn",
-      "Thought Leadership"
-    ],
-    "readingTime": "5 min read",
-    "featured": false,
-    "externalUrl": "https://www.linkedin.com/pulse/net-monorepo-migration-2026-blueprint-deepak-t-sgmuc/",
-    "source": "linkedin"
-  },
-  {
     "slug": "linkedin-porting-an-ai-dlc-1-x-project-to-2-x",
     "title": "Porting an AI-DLC 1.x project to 2.x",
     "description": "Porting an AI-DLC 1.x project to 2.x",
-    "date": "2026-10-10T05:56:08.336Z",
+    "date": "2026-10-29T05:07:46.790Z",
     "category": "LinkedIn Article",
     "tags": [
       "LinkedIn",
@@ -138,7 +18,7 @@
     "slug": "linkedin-the-end-of-vibe-coding-why-aws-labs-just-rewrote-t",
     "title": "The End of \"Vibe Coding\": Why AWS Labs Just Rewrote the Rules of AI Engineering with AI-DLC 2.0",
     "description": "The End of \"Vibe Coding\": Why AWS Labs Just Rewrote the Rules of AI Engineering with AI-DLC 2.0",
-    "date": "2026-10-10T05:56:08.336Z",
+    "date": "2026-10-29T05:07:46.790Z",
     "category": "LinkedIn Article",
     "tags": [
       "LinkedIn",
@@ -147,6 +27,126 @@
     "readingTime": "5 min read",
     "featured": true,
     "externalUrl": "https://www.linkedin.com/pulse/end-vibe-coding-why-aws-labs-just-rewrote-rules-ai-engineering-t-kmvuc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-from-sprints-to-bolts-transitioning-to-the-ai-driv",
+    "title": "🚀 From Sprints to Bolts: Transitioning to the AI-Driven Development Life Cycle (AI-DLC)",
+    "description": "🚀 From Sprints to Bolts: Transitioning to the AI-Driven Development Life Cycle (AI-DLC)",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/from-sprints-bolts-transitioning-ai-driven-development-deepak-t-fd4tc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-microsoft-s-new-era-of-ai-amplifying-human-potenti",
+    "title": "Microsoft's New Era of AI: Amplifying Human Potential 🚀",
+    "description": "Microsoft's New Era of AI: Amplifying Human Potential 🚀",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/microsofts-new-era-ai-amplifying-human-potential-deepak-t-iskdc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-from-agile-sprints-to-agentic-workflows-my-evoluti",
+    "title": "From Agile Sprints to Agentic Workflows: My Evolution from SDLC to AI-DLC",
+    "description": "From Agile Sprints to Agentic Workflows: My Evolution from SDLC to AI-DLC",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/from-agile-sprints-agentic-workflows-my-evolution-sdlc-deepak-t-n9wpc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-typescript-7-0-beta-10x-faster-with-go-powered-com",
+    "title": "TypeScript 7.0 Beta: 10x Faster with Go-Powered Compiler",
+    "description": "TypeScript 7.0 Beta: 10x Faster with Go-Powered Compiler",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/typescript-70-beta-10x-faster-go-powered-compiler-deepak-t-mmcnc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-goodbye-guids-hello-sanity-managing",
+    "title": "Goodbye GUIDs, Hello Sanity: Managing",
+    "description": "Goodbye GUIDs, Hello Sanity: Managing .NET Solutions with the New .slnx Format and CLI Tools",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/goodbye-guids-hello-sanity-managing-net-solutions-new-deepak-t-n2axc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-microsoft-agent-framework-1-0-is-officially-here-t",
+    "title": "🚀 Microsoft Agent Framework 1.0 is Officially Here! The Next Era of AI Orchestration",
+    "description": "🚀 Microsoft Agent Framework 1.0 is Officially Here! The Next Era of AI Orchestration",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/microsoft-agent-framework-10-officially-here-next-era-deepak-t-sofxc/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-net-aspire-13-2-the-shift-to-agent-native-orchestr",
+    "title": "🚀 .NET Aspire 13.2: The Shift to \"Agent-Native\" Orchestration",
+    "description": "🚀 .NET Aspire 13.2: The Shift to \"Agent-Native\" Orchestration",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/net-aspire-132-shift-agent-native-orchestration-deepak-t-wxgec/",
+    "source": "linkedin"
+  },
+  {
+    "slug": "linkedin-net-monorepo-migration-the-2026-blueprint",
+    "title": "🚀 .NET Monorepo Migration: The 2026 Blueprint",
+    "description": "🚀 .NET Monorepo Migration: The 2026 Blueprint",
+    "date": "2026-10-29T05:07:46.790Z",
+    "category": "LinkedIn Article",
+    "tags": [
+      "LinkedIn",
+      "Thought Leadership"
+    ],
+    "readingTime": "5 min read",
+    "featured": false,
+    "externalUrl": "https://www.linkedin.com/pulse/net-monorepo-migration-2026-blueprint-deepak-t-sgmuc/",
     "source": "linkedin"
   }
 ]
