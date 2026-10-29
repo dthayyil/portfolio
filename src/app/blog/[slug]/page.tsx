@@ -5,8 +5,37 @@ import { ArrowLeft, Clock, ExternalLink, Linkedin } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import { getPostBySlug, getPostSlugs, formatDate } from "@/lib/blog";
+import { getPostBySlug, getPostSlugs, formatDate, Post } from "@/lib/blog";
 import { site } from "@/content/site";
+
+// VisualArticle component for full HTML articles with Chart.js
+function VisualArticle({ post }: { post: Post }) {
+  return (
+    <div className="min-h-screen bg-slate-950">
+      {/* Portfolio navigation overlay */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <Link 
+            href="/blog" 
+            className="text-sm text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back to Articles
+          </Link>
+          <span className="text-xs text-slate-500">{formatDate(post.date)} · {post.readingTime}</span>
+        </div>
+      </nav>
+
+      {/* Render HTML content directly */}
+      <main 
+        className="pt-16"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
+
+      {/* Chart.js for interactive charts */}
+      <script src="https://cdn.jsdelivr.net/npm/chart.js" defer />
+    </div>
+  );
+}
 
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
@@ -46,6 +75,9 @@ export default async function PostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  // Check if this is a visual/HTML article
+  const isVisual = post.visual === true || post.content.trim().startsWith('<');
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -66,9 +98,22 @@ export default async function PostPage({
     },
     keywords: post.tags?.join(", "),
     inLanguage: "en",
-    ...(post.externalUrl ? { sameAs: post.externalUrl } : {}),
   };
 
+  // Visual articles: Full HTML with custom styling
+  if (isVisual) {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
+        <VisualArticle post={post} />
+      </>
+    );
+  }
+
+  // Standard MDX articles
   return (
     <article className="container-page min-h-screen max-w-3xl pb-24 pt-32">
       <script
@@ -142,4 +187,3 @@ export default async function PostPage({
     </article>
   );
 }
-

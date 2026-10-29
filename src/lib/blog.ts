@@ -17,6 +17,7 @@ export type PostMeta = {
   featured?: boolean;
   externalUrl?: string;
   source?: "local" | "linkedin";
+  visual?: boolean;
 };
 
 export type Post = PostMeta & { content: string };
@@ -83,6 +84,7 @@ export function getPostBySlug(slug: string): Post | null {
       externalUrl: data.externalUrl,
       source: data.externalUrl ? "linkedin" : "local",
       readingTime: readingTime(content).text,
+      visual: data.visual ?? false,
       content,
     };
   }
