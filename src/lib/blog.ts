@@ -36,7 +36,10 @@ export function getLinkedInPosts(): Post[] {
       slug: item.slug || `linkedin-${Date.now()}`,
       title: item.title || "Untitled Article",
       description: item.description || "",
-      date: item.date ? new Date(item.date).toISOString() : new Date().toISOString(),
+      date:
+        item.date && Number.isFinite(new Date(item.date).getTime())
+          ? new Date(item.date).toISOString()
+          : "",
       tags: Array.isArray(item.tags) ? item.tags : ["LinkedIn"],
       category: item.category || "LinkedIn Article",
       readingTime: item.readingTime || "5 min read",
@@ -124,10 +127,10 @@ export function getLatestPosts(n = 6): PostMeta[] {
 }
 
 export function formatDate(iso: string): string {
+  if (!iso || !Number.isFinite(new Date(iso).getTime())) return "Date unavailable";
   return new Date(iso).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
 }
-
