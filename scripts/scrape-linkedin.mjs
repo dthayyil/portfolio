@@ -10,23 +10,63 @@ const OUTPUT_FILE = path.join(BLOG_DIR, "linkedin-articles.json");
 const USER_DATA_DIR = path.join(process.cwd(), ".playwright-session");
 
 // Parse relative LinkedIn time strings like "3d", "2w", "1mo", "1 yr ago"
-function parseRelativeTime(str) {
-  if (!str) return new Date().toISOString();
-  const now = new Date();
-  const match = str.match(/(\d+)\s*(m|h|d|w|mo|yr)/i);
-  if (!match) return now.toISOString();
+function parseLinkedInDate(value) {
+  if (!value) return null;
 
-  const num = parseInt(match[1], 10);
+  const absoluteDate = new Date(value);
+  if (Number.isFinite(absoluteDate.getTime())) return absoluteDate.toISOString();
+
+  const match = value.match(
+    /\b(\d+)\s*(months?|mos?|mo|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|yr|y)\b/i
+  );
+  if (!match) return null;
+
+  const amount = Number.parseInt(match[1], 10);
   const unit = match[2].toLowerCase();
+  const date = new Date();
 
-  if (unit === "m") now.setMinutes(now.getMinutes() - num);
-  else if (unit === "h") now.setHours(now.getHours() - num);
-  else if (unit === "d") now.setDate(now.getDate() - num);
-  else if (unit === "w") now.setDate(now.getDate() - num * 7);
-  else if (unit === "mo") now.setMonth(now.getMonth() - num);
-  else if (unit === "yr") now.setFullYear(now.getFullYear() - num);
+  if (/^(mo|mos|month)/.test(unit)) date.setMonth(date.getMonth() - amount);
+  else if (/^(m|min)/.test(unit)) date.setMinutes(date.getMinutes() - amount);
+  else if (/^(h|hr|hour)/.test(unit)) date.setHours(date.getHours() - amount);
+  else if (/^(d|day)/.test(unit)) date.setDate(date.getDate() - amount);
+  else if (/^(w|week)/.test(unit)) date.setDate(date.getDate() - amount * 7);
+  else if (/^(y|yr|year)/.test(unit)) date.setFullYear(date.getFullYear() - amount);
 
-  return now.toISOString();
+  return date.toISOString();
+}
+
+async function getArticlePublishedDate(page, url) {
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    const dateValue = await page.evaluate(() => {
+      const metaDate = document.querySelector(
+        'meta[property="article:published_time"], meta[property="og:published_time"], meta[itemprop="datePublished"]'
+      )?.getAttribute("content");
+      if (metaDate) return metaDate;
+
+      const timeDate = document.querySelector("main time[datetime], article time[datetime], time[datetime]")
+        ?.getAttribute("datetime");
+      if (timeDate) return timeDate;
+
+      for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        try {
+          const parsed = JSON.parse(script.textContent || "");
+          const items = Array.isArray(parsed) ? parsed : [parsed];
+          const article = items.find((item) => item.datePublished);
+          if (article?.datePublished) return article.datePublished;
+        } catch (error) {
+          console.warn(`[LinkedIn Scraper] Could not parse an article metadata block: ${error.message}`);
+        }
+      }
+
+      return null;
+    });
+
+    return parseLinkedInDate(dateValue);
+  } catch (error) {
+    console.warn(`[LinkedIn Scraper] Could not read publication date from ${url}: ${error.message}`);
+    return null;
+  }
 }
 
 function cleanSlug(title, index) {
@@ -126,7 +166,9 @@ async function scrapeLinkedIn() {
         const container = a.closest("li, div.feed-shared-update-v2, .profile-creator-shared-feed-update__container") || a.parentElement;
         const title = a.innerText.trim() || a.getAttribute("aria-label") || container?.querySelector("h3, h2, strong")?.innerText?.trim() || "";
         const description = container?.querySelector(".feed-shared-update-v2__description, .feed-shared-inline-show-more-text, p")?.innerText?.trim() || "";
-        const timeText = container?.querySelector("time, .feed-shared-actor__sub-description, .update-components-actor__sub-description")?.innerText?.trim() || "";
+        const timeElement = container?.querySelector("time[datetime], time, .feed-shared-actor__sub-description, .update-components-actor__sub-description");
+        const timeText = timeElement?.innerText?.trim() || "";
+        const dateTime = timeElement?.getAttribute("datetime") || "";
 
         if (title && title.length > 5) {
           results.push({
@@ -134,6 +176,7 @@ async function scrapeLinkedIn() {
             link: url,
             description: description.replace(/\s+/g, " ").slice(0, 240) + (description.length > 240 ? "..." : ""),
             timeText,
+            dateTime,
           });
         }
       });
@@ -155,8 +198,9 @@ async function scrapeLinkedIn() {
         const title = titleElem ? titleElem.innerText.trim() : linkElem.innerText.trim();
         const descElem = card.querySelector(".feed-shared-update-v2__description, .feed-shared-inline-show-more-text, p");
         const description = descElem ? descElem.innerText.trim() : "";
-        const timeElem = card.querySelector("time, .feed-shared-actor__sub-description, .update-components-actor__sub-description");
+        const timeElem = card.querySelector("time[datetime], time, .feed-shared-actor__sub-description, .update-components-actor__sub-description");
         const timeText = timeElem ? timeElem.innerText.trim() : "";
+        const dateTime = timeElem?.getAttribute("datetime") || "";
 
         if (title && title.length > 5) {
           results.push({
@@ -164,6 +208,7 @@ async function scrapeLinkedIn() {
             link: url,
             description: description.replace(/\s+/g, " ").slice(0, 240) + (description.length > 240 ? "..." : ""),
             timeText,
+            dateTime,
           });
         }
       });
@@ -174,18 +219,30 @@ async function scrapeLinkedIn() {
     console.log(`[LinkedIn Scraper] Found ${scrapedArticles.length} raw articles.`);
 
     if (scrapedArticles.length > 0) {
-      const formatted = scrapedArticles.map((art, idx) => ({
-        slug: cleanSlug(art.title, idx),
-        title: art.title,
-        description: art.description || `Read full article by Deepak Thayyil on LinkedIn.`,
-        date: parseRelativeTime(art.timeText),
-        category: "LinkedIn Article",
-        tags: ["LinkedIn", "Thought Leadership"],
-        readingTime: "5 min read",
-        featured: idx < 2,
-        externalUrl: art.link,
-        source: "linkedin",
-      }));
+      const formatted = [];
+      for (const [idx, art] of scrapedArticles.entries()) {
+        const date =
+          parseLinkedInDate(art.dateTime) ||
+          parseLinkedInDate(art.timeText) ||
+          (await getArticlePublishedDate(page, art.link));
+
+        if (!date) {
+          console.warn(`[LinkedIn Scraper] Publication date unavailable for "${art.title}"`);
+        }
+
+        formatted.push({
+          slug: cleanSlug(art.title, idx),
+          title: art.title,
+          description: art.description || `Read full article by Deepak Thayyil on LinkedIn.`,
+          date: date || "",
+          category: "LinkedIn Article",
+          tags: ["LinkedIn", "Thought Leadership"],
+          readingTime: "5 min read",
+          featured: idx < 2,
+          externalUrl: art.link,
+          source: "linkedin",
+        });
+      }
 
       // Sort newest first
       formatted.sort((a, b) => +new Date(b.date) - +new Date(a.date));

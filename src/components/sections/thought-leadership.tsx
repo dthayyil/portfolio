@@ -7,7 +7,8 @@ import type { PostMeta } from "@/lib/blog";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { stagger, staggerItem, viewportOnce } from "@/lib/motion";
 
-function fmt(iso: string) {
+function formatPostDate(iso: string) {
+  if (!iso || !Number.isFinite(new Date(iso).getTime())) return "Date unavailable";
   return new Date(iso).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "short",
@@ -65,7 +66,7 @@ export function ThoughtLeadership({ posts }: { posts: PostMeta[] }) {
                         {post.category}
                       </span>
                       <span>·</span>
-                      <span>{fmt(post.date)}</span>
+                      <span>{formatPostDate(post.date)}</span>
                     </div>
                     {post.source === "linkedin" && (
                       <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#0A66C2]">
@@ -102,4 +103,3 @@ export function ThoughtLeadership({ posts }: { posts: PostMeta[] }) {
     </Section>
   );
 }
-
