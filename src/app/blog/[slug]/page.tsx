@@ -19,32 +19,9 @@ function VisualArticle({ post }: { post: Post }) {
 
   return (
     <div className="min-h-screen bg-slate-950">
-      {/* Portfolio navigation overlay */}
-      <nav className="sticky top-0 z-50 border-b border-slate-800 bg-slate-900/90 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="flex shrink-0 items-center gap-2 text-sm text-slate-400 transition-colors hover:text-cyan-400"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">Back to Articles</span>
-          </Link>
-          <span className="hidden text-sm font-bold tracking-tight text-cyan-300 sm:block">⚡ AI Token Economics</span>
-          <div className="flex min-w-0 items-center gap-4 overflow-x-auto whitespace-nowrap text-xs font-medium text-slate-300 sm:gap-5">
-            <a href="#overview" className="transition-colors hover:text-cyan-400">Overview</a>
-            <a href="#economics" className="transition-colors hover:text-cyan-400">Economics</a>
-            <a href="#token-trap" className="transition-colors hover:text-cyan-400">Token Trap</a>
-            <a href="#framework" className="transition-colors hover:text-cyan-400">Framework</a>
-            <a href="#comparison" className="transition-colors hover:text-cyan-400">Compare</a>
-            <a href="#finops" className="transition-colors hover:text-cyan-400">Governance</a>
-          </div>
-          <span className="hidden shrink-0 text-xs text-slate-500 lg:block">{formatDate(post.date)} · {post.readingTime}</span>
-        </div>
-      </nav>
-
       {/* Render HTML content directly */}
       <main 
-        className="min-h-screen"
+        className="min-h-screen pt-12 sm:pt-20"
         dangerouslySetInnerHTML={{ __html: processedContent }}
       />
 
