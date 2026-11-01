@@ -8,26 +8,98 @@ import rehypeSlug from "rehype-slug";
 import { getPostBySlug, getPostSlugs, formatDate, Post } from "@/lib/blog";
 import { site } from "@/content/site";
 
-// VisualArticle component for full HTML articles with Chart.js
+// VisualArticle component for full HTML articles
 function VisualArticle({ post }: { post: Post }) {
-  // Remove HTML comments and convert markdown horizontal rules to <hr>
-  // This preprocessing helps ensure the content renders correctly
+  // Remove HTML comments, normalize landmarks, and convert markdown horizontal rules to <hr>
   const processedContent = post.content
-    .replace(/<!--[\s\S]*?-->/g, '') // Remove HTML comments
+    .replace(/<!--[\s\S]*?-->/g, "") // Remove HTML comments
+    .replace(/<main(\s|>)/g, "<div$1") // Avoid nested <main> landmark
+    .replace(/<\/main>/g, "</div>")
     .replace(/^---+\s*$/gm, '<hr class="border-slate-800 my-12" />') // Convert markdown horizontal rules
-    .replace(/\n\n/g, '\n'); // Normalize whitespace
+    .replace(/\n\n/g, "\n"); // Normalize whitespace
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <article className="min-h-screen bg-slate-950 text-slate-100 font-sans">
+      {/* Top Navigation & Breadcrumbs Bar */}
+      <div className="mx-auto max-w-7xl px-4 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-6">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/blog/"
+              className="group inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/90 px-4 py-2 text-sm font-medium text-slate-200 backdrop-blur transition-all hover:border-cyan-500/50 hover:bg-slate-800 hover:text-white hover:shadow-glow"
+            >
+              <ArrowLeft className="h-4 w-4 text-cyan-400 transition-transform group-hover:-translate-x-1" />
+              <span>All articles</span>
+            </Link>
+            <span className="hidden text-slate-600 sm:inline">/</span>
+            <Link
+              href="/"
+              className="hidden text-xs text-slate-400 transition-colors hover:text-slate-200 sm:inline"
+            >
+              Home
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5 text-xs text-slate-400">
+            {post.category && (
+              <span className="rounded-full border border-cyan-500/30 bg-cyan-950/60 px-2.5 py-1 font-medium text-cyan-300">
+                {post.category}
+              </span>
+            )}
+            {post.date && (
+              <>
+                <span>·</span>
+                <span>{formatDate(post.date)}</span>
+              </>
+            )}
+            {post.readingTime && (
+              <>
+                <span>·</span>
+                <span className="inline-flex items-center gap-1 text-slate-300">
+                  <Clock className="h-3.5 w-3.5 text-cyan-400" />
+                  {post.readingTime}
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Render HTML content directly */}
-      <main 
-        className="min-h-screen pt-12 sm:pt-20"
+      <div
+        className="pb-16"
         dangerouslySetInnerHTML={{ __html: processedContent }}
       />
 
-      {/* Chart.js for interactive charts */}
-      <script src="https://cdn.jsdelivr.net/npm/chart.js" defer />
-    </div>
+      {/* Bottom Navigation & Next Steps */}
+      <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 backdrop-blur">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              Visual Framework Complete
+            </div>
+            <h3 className="mt-3 text-xl font-bold text-white">Continue Reading</h3>
+            <p className="mt-1 text-sm text-slate-400 max-w-xl">
+              Explore more thought leadership on AI-DLC, platform engineering, and enterprise engineering leadership.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href="/blog/"
+              className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-400"
+            >
+              <ArrowLeft className="h-4 w-4" /> All articles
+            </Link>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-5 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-slate-700 hover:text-white"
+            >
+              Back to Home
+            </Link>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -70,7 +142,7 @@ export default async function PostPage({
   if (!post) notFound();
 
   // Check if this is a visual/HTML article
-  const isVisual = post.visual === true || post.content.trim().startsWith('<');
+  const isVisual = post.visual === true || post.content.trim().startsWith("<");
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -94,7 +166,7 @@ export default async function PostPage({
     inLanguage: "en",
   };
 
-  // Visual articles: Full HTML with custom styling
+  // Visual articles: Full HTML with custom styling and dedicated chrome
   if (isVisual) {
     return (
       <>
@@ -114,12 +186,21 @@ export default async function PostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <Link
-        href="/blog"
-        className="inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-fg"
-      >
-        <ArrowLeft className="h-4 w-4" /> All articles
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link
+          href="/blog/"
+          className="group inline-flex items-center gap-2 rounded-full border border-border bg-surface-2/60 px-4 py-2 text-sm font-medium text-fg-muted transition-colors hover:border-brand/40 hover:text-fg"
+        >
+          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          <span>All articles</span>
+        </Link>
+        <Link
+          href="/"
+          className="text-xs text-fg-muted transition-colors hover:text-fg"
+        >
+          Home
+        </Link>
+      </div>
 
       <header className="mt-8">
         <div className="flex flex-wrap items-center gap-2 text-xs text-fg-muted">
@@ -177,6 +258,21 @@ export default async function PostPage({
             },
           }}
         />
+      </div>
+
+      <div className="mt-16 border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <Link
+          href="/blog/"
+          className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface-2/60 px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-brand/50 hover:text-brand"
+        >
+          <ArrowLeft className="h-4 w-4" /> Back to all articles
+        </Link>
+        <Link
+          href="/"
+          className="text-sm text-fg-muted transition-colors hover:text-fg"
+        >
+          Back to Home &rarr;
+        </Link>
       </div>
     </article>
   );
